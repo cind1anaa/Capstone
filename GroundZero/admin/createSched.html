@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Collection Schedule - Ground Zero</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f5ef;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      height: 100%;
+      width: 250px;
+      background-color: #cfe2c3;
+      padding: 20px;
+      transition: left 0.3s ease;
+      z-index: 1050;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar .logo img {
+      height: 50px;
+      margin-bottom: 15px;
+    }
+
+    .sidebar h4 {
+      color: #27692A;
+      margin-top: 10px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .sidebar ul li {
+      margin: 15px 0;
+      font-size: 16px;
+    }
+
+    .sidebar ul li i {
+      margin-right: 10px;
+    }
+
+    .sidebar ul li a {
+      color: #000;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .topbar {
+      background-color: #27692A;
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1040;
+    }
+
+    .toggle-btn {
+      font-size: 24px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .profile-icon {
+      font-size: 24px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      display: none;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+   .dashboard-container {
+      padding: 20px;
+      margin-left: 0;
+      transition: margin-left 0.3s;
+    }
+    .sidebar.active ~ .dashboard-container {
+      margin-left: 250px;
+    }
+
+    .profile-icon {
+      font-size: 24px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tabs button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #cfe2c3;
+      color: #27692A;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+   .tabs button.active {
+      background-color: #27692A;
+      color: #fff;
+    }
+
+    .form-box {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .form-box label {
+      font-weight: 600;
+    }
+
+    .btn-create {
+      background-color: #27692A;
+      color: white;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .sidebar ul li a.active {
+    background-color: #27692A;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+
+  .sidebar ul li a.active i {
+  color: white;
+}
+.logout {
+  position: absolute;
+  bottom: 10px;
+  width: 50%;
+  text-align: center;
+}
+
+.logout a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.logout a:hover {
+  background-color: #b4d7a9;
+  border-radius: 4px;
+}
+
+.logout i {
+  margin-right: 4px;
+}
+
+.form-control,
+.form-select,
+textarea {
+  border-radius: 0.5rem;
+  border: 2px solid #27692A;
+  background-color: #eaf7ea;
+  color: #27692A;
+}
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+  border-color: #1e5221;
+  box-shadow: 0 0 0 0.25rem rgba(39, 105, 42, 0.25);
+  background-color: #f4fbf4;
+  color: #27692A;
+}
+
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="logo text-center">
+      <img src="images/logo.png" alt="Logo" />
+      <h4>Ground Zero</h4>
+    </div>
+    <ul>
+      <li><a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+      <li><a href="feed.php"><i class="bi bi-envelope-fill"></i> News Feed</a></li>
+      <li><a href="user.html"><i class="bi bi-people-fill"></i> User Management</a></li>
+      <li><a href="monitoring.html"><i class="bi bi-recycle"></i> Waste Monitoring</a></li>
+      <li><a href="createSched.html" class="active"><i class="bi bi-truck"></i> Collection Schedule</a></li>
+      <li><a href="announcement.html"><i class="bi bi-megaphone"></i> Announcements</a></li>
+      <li><a href="waste.html"><i class="bi bi-bar-chart-fill"></i> Waste Reports</a></li>
+      <li><a href="collection.html"><i class="bi bi-trash3-fill"></i> Collection Request</a></li>
+    </ul>
+        <div class="logout">
+    <a href="logout.html"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Topbar -->
+  <div class="topbar d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-3">
+      <span class="toggle-btn" id="toggleBtn"><i class="bi bi-list"></i></span>
+      <h5 class="m-0">Collection Schedule</h5>
+    </div>
+    <a href="admin_profile.php">
+  <i class="bi bi-person-circle profile-icon" style="color: white;"></i>
+</a>
+  </div>
+
+  <!-- Main Content -->
+   <div class="dashboard-container container-fluid" id="dashboardContainer">
+    <div class="tabs">
+      <button class="active">Create Schedule</button>
+      <a href="scheduled.html"><button>Scheduled Collections</button></a>
+      <a href="history.html"><button>History</button></a>
+    </div>
+
+    <div class="form-box">
+      <form>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="barangay" class="form-label">Barangay</label>
+            <select id="barangay" class="form-select">
+              <option selected disabled>Select Barangay</option>
+              <option>Pulungbulu</option>
+              <option>San Fernando</option>
+              <option>Del Pilar</option>
+              <option>Sto. Cristo</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="collection-date" class="form-label">Collection Date</label>
+            <input type="date" id="collection-date" class="form-control" placeholder="Enter Date">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="truck-details" class="form-label">Truck Details</label>
+            <input type="text" id="truck-details" class="form-control" placeholder="Enter Truck Details">
+          </div>
+          <div class="col-md-6">
+            <label for="remarks" class="form-label">Remarks</label>
+            <textarea id="remarks" rows="1" class="form-control" placeholder="Enter Remarks"></textarea>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn-create">CREATE</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript for Sidebar Toggle -->
+  <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const dashboardContainer = document.getElementById('dashboardContainer');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+      dashboardContainer.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      dashboardContainer.classList.remove('active');
+    });
+  </script>
+</body>
+</html>

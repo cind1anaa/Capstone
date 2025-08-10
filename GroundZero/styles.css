@@ -1,0 +1,120 @@
+/* Navbar Styling */
+.custom-navbar {
+  background-color: #27692A;
+}
+
+.navbar-brand span {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.custom-navbar .nav-link {
+  color: #ffffff;
+}
+
+.custom-navbar .nav-link.active,
+.custom-navbar .nav-link:hover {
+  color: #f1f1f1;
+}
+
+.custom-navbar .nav-link.active {
+  background-color: white;
+  color: #27692A !important;
+  border-radius: 5px;
+  padding: 6px 12px;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.hero-section > .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-section h1.display-3 {
+  color: #173D1D;
+}
+
+.hero-section img {
+  width: 220px;
+  height: auto;
+}
+
+/* Button Styling */
+.btn-light-green {
+  background-color: #598D3E;
+  color: white;
+  border: none;
+}
+
+.btn-light-green:hover {
+  background-color: #4a7934;
+  color: white;
+}
+
+/* Explore Text */
+.explore-text {
+  font-size: 1rem;
+}
+
+/* SDG Cards */
+.sdg-hover {
+  position: relative;
+  display: inline-block;
+  width: 220px;
+  cursor: pointer;
+}
+
+.sdg-hover img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+.hover-text {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  opacity: 0;
+  padding: 15px;
+  font-size: 0.85rem;
+  text-align: left;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.sdg-hover:hover .hover-text {
+  opacity: 1;
+}
+
+/* Additional SDG Background Classes (if reused later) */
+.sdg-orange {
+  background: url('images/sdg2-bg.jpg'), #e67e22;
+}
+
+.sdg-green {
+  background: url('images/sdg15-bg.jpg'), #27ae60;
+}
+
+.sdg-brown {
+  background: url('images/sdg12-bg.jpg'), #d35400;
+}
