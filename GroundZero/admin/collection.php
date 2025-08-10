@@ -149,19 +149,16 @@ $result = $conn->query($query);
     }
 
     .search-bar {
-      background-color: #cfe2c3;
-      padding: 8px 15px;
-      border-radius: 25px;
-      display: flex;
-      align-items: center;
-      width: 300px;
+      background-color: #cde4cd;
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
     }
 
     .search-bar input {
       border: none;
       background: transparent;
       outline: none;
-      flex: 1;
+      width: 100%;
       font-size: 14px;
     }
 
@@ -343,14 +340,11 @@ $result = $conn->query($query);
       <a href="Chistory.php"><button>History</button></a>
     </div>
 
-    <div class="d-flex align-items-center gap-2 mb-3">
-      <div class="search-bar">
-        <i class="bi bi-search me-2"></i>
-        <input type="text" id="searchInput" placeholder="Search by name, contact, location, waste type, or quantity..." />
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="search-bar d-flex align-items-center w-50">
+        <input type="text" class="form-control" id="searchInput" placeholder="Search requests...">
+        <i class="bi bi-arrow-down-up ms-2"></i>
       </div>
-      <button class="btn btn-outline-success btn-sm" id="sortToggle" data-sort-col="5" title="Sort by Date">
-        <i class="bi bi-arrow-down-up"></i>
-      </button>
     </div>
 
     <div class="table-container">
@@ -501,26 +495,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    // Sort functionality
-    const sortToggle = document.getElementById('sortToggle');
-    let sortAsc = true;
-    if (sortToggle) {
-      sortToggle.addEventListener('click', function() {
-        const sortCol = parseInt(this.getAttribute('data-sort-col') || '0', 10);
-        const tableBody = document.querySelector('tbody');
-        const rowsArray = Array.from(tableBody.querySelectorAll('tr'));
-
-        rowsArray.sort((a, b) => {
-          const aText = (a.querySelectorAll('td')[sortCol]?.textContent || '').trim();
-          const bText = (b.querySelectorAll('td')[sortCol]?.textContent || '').trim();
-          const comp = aText.localeCompare(bText, undefined, { numeric: true, sensitivity: 'base' });
-          return sortAsc ? comp : -comp;
-        });
-
-        rowsArray.forEach(row => tableBody.appendChild(row));
-        sortAsc = !sortAsc;
-      });
-    }
+    // (Sorting icon is visual only to match Rhistory.php)
 
     // Add function to handle request status updates
     window.updateStatus = function(requestId, status) {
